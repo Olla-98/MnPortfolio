@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Autolijst met prijzen</title>
+  <link rel="stylesheet" href="autos.css">
+  <script src="autos.js" defer></script>
+</head>
+
+<body>
+
+  <h2>Auto's en prijzen</h2>
+
+  <!-- Toevoegen -->
+  <h3>Toevoegen</h3>
+  <div class="inputgroep">
+    <label for="autoInput">Het Merk</label>
+    <input type="text" id="autoInput" placeholder="Auto naam"><br>
+
+    <label for="prijsInput">Prijs</label>
+    <input type="number" id="prijsInput" placeholder="Prijs in €"><br>
+
+    <button onclick="toevoegenAuto()">Toevoegen</button>
+  </div>
+
+  <!-- Output -->
+  <h3>Autolijst</h3>
+  <div id="autolijst"></div>
+  <div id="status"></div>
+
+  <!-- Verwijderen -->
+  <h3>Verwijderen</h3>
+  <div class="inputgroep">
+    <label for="verwijderIndex">De Auto die je wilt verwijderen</label>
+    <input type="number" id="verwijderIndex" placeholder="Welke index?"><br>
+
+    <!-- Index is de positie van de auto in de lijst, beginnend bij 0-->
+     
+    <button onclick="verwijderAuto()">Verwijder</button>
+    <!--Wanneer je op de knop klikt, wordt de functie verwijderAuto() uitgevoerd-->
+  </div>
+
+  <!-- Aanpassen -->
+  <h3>Aanpassen</h3>
+  
+  <div class="inputgroep">
+    <label for="pasAanIndex">De Auto die je wilt aanpassen</label>
+    <input type="number" id="pasAanIndex" placeholder="Index om aan te passen"><br>
+
+    <label for="nieuweAuto">Het merk</label>
+    <input type="text" id="nieuweAuto" placeholder="Nieuwe naam"><br>
+
+    <label for="nieuwePrijs">De prijs</label>
+    <input type="number" id="nieuwePrijs" placeholder="Nieuwe prijs">
+    <button onclick="pasAutoAan()">Pas aan</button>
+  </div>
+
+
+
+</body>
+
+</html>

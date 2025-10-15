@@ -1,0 +1,116 @@
+ body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     background: linear-gradient(180deg, #3498db, #5ab37f); /*een kleurverloop (gradient): meerdere kleuren in een verloop (Verticale , horizontale en schuine )*/
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #2f4760;
+    }
+
+    h2 {
+      margin-top: 20px;
+      font-size: 2rem;
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: #34495e;
+    }
+
+    /* Containers voor de secties */
+    .inputgroep {
+      background: white;
+      max-width: 400px;
+      margin: 15px auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /*Zorgt voor een lichte schaduw onder de container*/
+    }
+
+    label {
+      display: block; /* Maakt dat het label een blok-element is, zodat het op een nieuwe regel begint */
+      margin-top: 10px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s; /*Zorgt voor een vloeiende overgang van de randkleur bij focus*/
+    }
+
+    input[type="text"]:focus,  /* focus wordt geactiveerd als je in een input klikt.*/
+    input[type="number"]:focus { 
+      outline: none;
+      border-color: #3498db; /* Verandert de randkleur bij focus */
+      box-shadow: 0 0 4px rgba(52, 152, 219, 0.5);
+    } 
+
+    button {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      font-size: 15px;
+      padding: 10px 15px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer; /* verandert muisaanwijzer bij hover */
+      transition: background-color 0.3s, transform 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+      transform: translateY(-1px); /* Maakt een lichte "opstijging" effect bij hover, beweegt de hover subtiel omhoog */
+    }
+
+    #autolijst {
+      max-width: 500px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    #autolijst p { /* Stijlen voor elke paragraaf in de autolijst */
+      background: #f7f9fb;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 8px;
+      font-size: 15px;
+      border-left: 4px solid #3498db; /*Voegt een gekleurde lijn toe aan de linkerkant van elke paragraaf*/
+    }
+
+    #autolijst p strong {
+      color: #27ae60;
+    }
+
+    #status {
+      max-width: 500px;
+      margin: 15px auto;
+      text-align: center;
+      font-weight: bold;
+      color: #2c3e50;
+      font-size: 16px;
+      padding: 10px;
+    }
+
+    /* Responsief voor mobiele schermen */
+    @media (max-width: 600px) {
+      .inputgroep, #autolijst {
+        width: 90%;
+      }
+    }

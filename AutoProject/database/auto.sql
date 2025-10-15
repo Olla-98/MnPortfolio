@@ -1,0 +1,16 @@
+CREATE DATABASE IF NOT EXISTS autodb;
+USE autodb;
+
+CREATE TABLE IF NOT EXISTS autos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  merk VARCHAR(150) NOT NULL,
+  prijs DECIMAL(10,2) NOT NULL
+);
+
+
+INSERT INTO autos (merk, prijs) VALUES
+('Volvo', 20000),
+('BMW', 30000),
+('Ford', 25000),
+('Tesla', 50000),
+('Audi', 45000);

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basis</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        h3 {
+            color: darkgreen;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        button {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: lightgrey;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: grey;
+            color: white;
+        }
+
+        .output {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #0b3f2f;
+            background-color: #b0c2b7;
+            width: 500px;
+        }
+
+        .inputfield {
+            display: flex;
+            flex-direction: column;
+            gap: 10p;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #213f0b;
+            background-color: #b0c2b0;
+            width: 100px;
+        }
+    </style>
+
+
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Did you made a change to the text?";
+        }
+
+        function showImage(animal) {
+            document.getElementById('image').src = animal + '.png'
+        }
+
+        function berekenOmtrek() {
+            //   1. get the value from the input field
+            let straal = document.getElementById('straal').value;
+
+            // 2. controle if the value is a number
+            if (straal === "" || isNaN(straal) || straal <= 0) { //isNaN() controleert of het géén getal is
+                alert("write a number greater than 0");
+                return;
+            }
+            // 3. calculate the omtrek
+            let omtrek = 2 * Math.PI * straal;
+
+            // 4. show the result in the paragraph
+            document.getElementById('resultaat').innerHTML = "The omtrek is " + omtrek.toFixed(2) + "cm"; //.toFixed(2) zorgt dat het resultaat netjes op 2 decimalen wordt afgerond.
+            console.log("omterk:" + omtrek.toFixed(2) + "cm");
+            alert("the omtrek is " + omtrek.toFixed(2) + "cm");
+
+        }
+
+        for (let i = 0; i < 5; i++) {
+            console.log("Tel: " + i);
+        }
+
+        let j = 0;
+        while (j < 3) {
+            console.log("While: " + j);
+            j++;
+        }
+
+        let arr = ["appel", "banaan", "kers"];
+        for (let fruit of arr) {
+            console.log(fruit);
+        }
+
+        function theresult() {
+            // get the values from the input fields
+            let fname = document.getElementById('fname').value;
+            let lname = document.getElementById('lname').value;
+            let age = parseInt(document.getElementById('age').value);
+            let hnumber = parseInt(document.getElementById('hnumber').value);
+
+            // som of age and hnumber
+            let som = age + hnumber;
+
+            // make the output text
+
+            let text = "Hallo" + " " + fname + "" + lname + ". <br> You are after " + hnumber + ": " + som + "years old.<br>";
+
+
+            // show the output text in the div with id output
+            document.getElementById('rslt').innerHTML = text;
+
+        }
+        // JavaScript Arrays
+        function arrayFunction() {
+            const jsarry = ["HTML", "CSS", "JavaScript", "Python", "Java", "C++", "PHP"];
+            document.getElementById("jsarry").innerHTML = jsarry;
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <h2>This is my first JS page</h2>
+
+    <p id="demo">JavaScript is fun!</p>
+
+    <button type="button" onclick="myFunction()">Click me!</button>
+
+
+    <h3>What can JS do?</h3>
+    <p id="text"> It can change the style of HTML element</p>
+
+    <button typ="button" onclick="document.getElementById('text').style.color='red' ">Try it!</button>
+
+    <h3>
+        What else can JS do?
+    </h3>
+
+    <button type="button"
+        onclick="document.getElementById('img').src='https://png.pngtree.com/png-vector/20230412/ourmid/pngtree-color-good-looking-butterfly-specimen-png-image_6681300.png'">
+        With Colors</button>
+
+    <img id="img" src="https://www.pngall.com/wp-content/uploads/5/Butterfly-PNG-High-Quality-Image.png"
+        style="width: 50px;" alt="butterfly">
+
+    <button type="button"
+        onclick="document.getElementById('img').src='https://png.pngtree.com/png-clipart/20250116/original/pngtree-a-black-and-white-beutiful-butterfly-no-background-png-image_20000025.png'">
+        black/white</button>
+
+    <h3>
+        What else can JS do?
+    </h3>
+    <p id="element"> It can hide HTML elements</p>
+
+    <button type="button" onclick="document.getElementById('element').style.display='none'">Try that now</button>
+
+    <h3>
+        Or showing hidden elements
+    </h3>
+
+    <p id="hide" style="display:none">Did you belive it!</p>
+
+    <button type="button" onclick="document.getElementById('hide').style.display='block'"> Try it!</button>
+
+    <h3>
+        Or shows images
+    </h3>
+    <p>Choose an animal:</p>
+    <button type="button" onclick="showImage('kip')">chicken</button>
+
+    <button type="button" onclick="showImage('rabbit')">konijn</button>
+
+    <br>
+    <button type="button" onclick="showImage('eekoorn')">eekoorn</button>
+
+    <br>
+    <button type="button" onclick="showImage('vosje')">vos</button>
+    <br>
+    <img id="image" src="" style="width:100px;" alt="animal">
+
+    <h3>
+        or do calculations
+    </h3>
+    <br>
+    <p>Choose a srtaal in cm </p>
+    <input type="number" id="straal" name="straal" min="1" max="100" placeholder="straal in cm">
+    <button type="button" onclick="berekenOmtrek()">The result</button>
+
+    <div id="resultaat" style="margin-top: 10px; width: 100px;"></div>
+
+
+
+    <div class="inputfield">
+
+        <label for="fname">First name:</label>
+        <input typy="text" id="fname" name="fname" placeholder="John"> <br>
+
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname" placeholder="Pater"> <br>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" placeholder="25"> <br>
+
+        <label for="hnumber">House number:</label>
+        <input type="number" id="hnumber" name="hnumber" placeholder="10"> <br>
+
+    </div>
+
+    <button onclick="theresult()">Show me the result</button>
+
+    <div id="rslt" class="output"></div>
+
+
+    <h3> JavaScript Array's </h3>
+    <br>
+    <p id="jsarry"></p>
+    <button type="button" onclick="arrayFunction()">Show me the array</button>
+
+
+</body>
+
+</html>
