@@ -1,0 +1,88 @@
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stat-card {
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-blue {
+  background-color: #dbeafe;
+}
+
+.stat-green {
+  background-color: #dcfce7;
+}
+
+.stat-purple {
+  background-color: #f3e8ff;
+}
+
+.stat-red {
+  background-color: #fee2e2;
+}
+
+.dark .stat-blue {
+  background-color: #1e3a8a;
+}
+
+.dark .stat-green {
+  background-color: #064e3b;
+}
+
+.dark .stat-purple {
+  background-color: #581c87;
+}
+
+.dark .stat-red {
+  background-color: #7f1d1d;
+}
+
+.stat-emoji {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.stat-blue .stat-value {
+  color: #2563eb;
+}
+
+.stat-green .stat-value {
+  color: #10b981;
+}
+
+.stat-purple .stat-value {
+  color: #8b5cf6;
+}
+
+.stat-red .stat-value {
+  color: #ef4444;
+}
+
+.dark .stat-value {
+  color: white;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.dark .stat-label {
+  color: #d1d5db;
+}
