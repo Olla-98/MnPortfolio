@@ -33,6 +33,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("isDarkMode", isDarkMode.toString());
   }, [isDarkMode]);
+  
 
   // CRUD-functies via API
   async function addTask(taskText, category) {
