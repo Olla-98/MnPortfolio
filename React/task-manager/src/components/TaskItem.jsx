@@ -31,7 +31,7 @@ function TaskItem(props) {
       <div className="task-item-content">
         
         <button
-          onClick={() => props.onToggle(props.task.id)}
+          onClick={() => props.onToggle(props.task._id)}
           className={checkboxClass}
         >
           {props.task.completed && <Check size={16} />}
@@ -47,7 +47,7 @@ function TaskItem(props) {
         </div>
         
         <button
-          onClick={() => props.onDelete(props.task.id)}
+          onClick={() => props.onDelete(props.task._id)}
           className="delete-button"
         >
           <Trash2 size={18} />
