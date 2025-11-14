@@ -4,7 +4,7 @@ import '../styles/Statistics.css';
 function Statistics(props) {
   // props: totalTasks, completedTasks, completionRate, totalPomodoros, isDarkMode
   
-  // bepaal class voor card
+  // bepaalt class voor card afhankelijk van dark mode
   let cardClass = 'card';
   if (props.isDarkMode) {
     cardClass = 'card dark';
@@ -18,7 +18,7 @@ function Statistics(props) {
         
         <div className="stat-card stat-blue">
           <div className="stat-emoji">📋</div>
-          <div className="stat-value">{props.totalTasks}</div>
+          <div className="stat-value">{props.totalTasks}</div> 
           <div className="stat-label">Totaal taken</div>
         </div>
         

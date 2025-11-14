@@ -22,12 +22,12 @@ function PomodoroTimer(props) {
     const interval = setInterval(() => {
       // als er nog seconden over zijn
       if (timerSeconds > 0) {
-        setTimerSeconds(timerSeconds - 1);
+        setTimerSeconds(timerSeconds - 1); // verminder seconden met 1
       } 
       // als seconden 0 zijn maar minuten nog over
       else if (timerMinutes > 0) {
-        setTimerMinutes(timerMinutes - 1);
-        setTimerSeconds(59);
+        setTimerMinutes(timerMinutes - 1); // verminder minuten met 1
+        setTimerSeconds(59); // zet seconden op 59
       }
       // als beide 0 zijn
       else {
@@ -37,9 +37,9 @@ function PomodoroTimer(props) {
     
     // cleanup functie
     return () => {
-      clearInterval(interval);
+      clearInterval(interval); // interval opruimen bij unmount of bij wijziging
     };
-  }, [isTimerRunning, timerMinutes, timerSeconds]);
+  }, [isTimerRunning, timerMinutes, timerSeconds]); // afhankelijkheden voor effect 
   
   // functie voor timer start/stop
   function toggleTimer() {

@@ -21,21 +21,21 @@ function TaskInput(props) {
       return;
     }
     
-    // roep de functie aan die we van App.jsx kregen
+    // roepen de functie aan die we van App.jsx kregen
     props.onAddTask(taskInput, selectedCategory);
     
     // maak input veld leeg
     setTaskInput('');
   }
   
-  // functie voor enter toets
+  // functie voor enter toets, zodat ook met enter kan toevoegen
   function handleKeyPress(e) {
     if (e.key === 'Enter') {
       handleAddTask();
     }
   }
   
-  // bepaal class voor card
+  // bepaalt class voor card
   let cardClass = 'card';
   if (props.isDarkMode) {
     cardClass = 'card dark';

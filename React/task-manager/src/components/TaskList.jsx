@@ -5,13 +5,13 @@ import '../styles/TaskList.css';
 function TaskList(props) {
   // props: tasks, onToggleTask, onDeleteTask, isDarkMode
   
-  // bepaal class voor card
+  // bepaalt class voor card afhankelijk van dark mode
   let cardClass = 'card';
   if (props.isDarkMode) {
     cardClass = 'card dark';
   }
   
-  // bepaal class voor no tasks message
+  // bepaalt class voor no tasks message afhankelijk van dark mode
   let noTasksClass = 'no-tasks-message';
   
   return (
