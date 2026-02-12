@@ -75,7 +75,15 @@ function getFilteredUsers() {
 
   userList.forEach(user => {
     const div = document.createElement("div");
+    div.classList.add("user-item"); // CSS-klasse toevoegen voor styling
     div.textContent = user.name;
+
+// Highlighten van de geselecteerde gebruiker
+     // Controleer of er een geselecteerde gebruiker is en of deze overeenkomt met de huidige gebruiker in de lijst
+    if (state.selectedUser && state.selectedUser.id === user.id) {
+      state.selectedUser = user; // geselecteerde gebruiker opslaan in de app-state
+      div.classList.add("actief"); // CSS-klasse toevoegen voor geselecteerde gebruiker
+    }
 
 // selectie toevoegen sprint 2
     div.addEventListener("click", () => {
@@ -92,15 +100,20 @@ function renderUserDetail() {
   const detailContainer = document.getElementById("user-detail");
 
   if (!state.selectedUser) {
-    detailContainer.innerHTML = "<p>Selecteer een gebruiker om details te zien.</p>";
+    detailContainer.innerHTML =  `
+      <div class="empty-state">
+        <p>Selecteer een gebruiker om details te zien.</p>
+      </div>
+    `;
     return;
   }
   const user = state.selectedUser;
   detailContainer.innerHTML = `
     <h3>${user.name}</h3>
-    <p>Email: ${user.email}</p>
-    <p>Phone: ${user.phone}</p>
-    <p>Company: ${user.company.name}</p>
+    <p><strong>Email:</strong> ${user.email}</p>
+    <p><strong>Phone:</strong> ${user.phone}</p>
+    <p><strong>Company:</strong> ${user.company.name}</p>
+    <p><strong>City:</strong> ${user.address.city}</p>
   `;
 }
 // Functie om status weer te geven in de DOM. updateStatus = UI afgeleide van state

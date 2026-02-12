@@ -1,45 +1,163 @@
+
+/* CSS voor Data Dashboard App */
+
+
+/* 1 Desgin systeem*/ 
+/*root verwijst naar het hoogste element in de DOM (html).*/
+:root { 
+  /*CSS veriabelen*/
+  --bg-gradient: linear-gradient(135deg, #1e293b, #0f172a);
+  --card-bg: rgba(255, 255, 255, 0.08); /* transparante achtergrond voor glassmorphism effect */
+  --card-solid: #ffffff;
+  --primary: #8b5cf6;
+  --accent: #06b6d4;
+  --text-main: #f1f5f9;
+  --text-dark: #0f172a;
+  --text-muted: #94a3b8;
+  --radius: 18px;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+/* design tokens gebruiken om consistentie en onderhoudbaarheid te garanderen:
+
+Consistentie: overal dezelfde kleur
+
+Onderhoudbaarheid: 1 plek aanpassen
+
+Theming mogelijk (dark/light mode)
+
+In grote applicaties gebruiken*/ 
+
+/* 2 Global styles */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #e4b7e2;
-    margin: 40px;
-    background-color: #192234;
+  margin: 0;
+  padding: 50px;
+  font-family: "Inter", system-ui, sans-serif; /* Typogrfie: moderne, leesbare font */
+  background: var(--bg-gradient);
+  color: var(--text-main);
 }
 
+/* Header */
+h1 {
+  font-size: 34px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+p {
+  color: var(--text-muted);
+  margin-bottom: 30px;
+}
+
+/* Zoekinput */
+input {
+  width: 100%;
+  max-width: 400px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: none;
+  font-size: 15px;
+  margin-bottom: 25px;
+  background: rgba(255,255,255,0.15); /* rgba = kleur met transparantie*/ 
+  color: white;
+  backdrop-filter: blur(10px);/* backdrop-filter = blur van achtergrond */  
+  transition: 0.2s ease;
+}
+
+input::placeholder {
+  color: #cbd5e1;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.5);
+}
+
+/* 3 Layout systeem 
+Grid is geschikter voor 2D layouts met vaste en flexibele kolommen*/
 .dashboard {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 40px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid; /* CSS Grid gebruiken voor een flexibel en responsief layout */
+  grid-template-columns: 320px 1fr;
+  gap: 40px; /* ruimte tussen de twee panelen */
 }
 
-#status {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #dedede;
-}
-
-.user-list div {
-    background-color: #f5f5f5d7;
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #0000005d;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(132, 129, 129, 0);
-    margin-top: 2px;
-}
-
-.user-list div:hover {
-    background-color: #1e2126;
-}
-
+/* 4 Card artchitectuur */
+.user-list,
 .user-detail {
-    background-color: #f5f5f5d7;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(205, 201, 201, 0.1);
-    margin-top: 2px;
-    border-bottom: 1px solid #0000005d;
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Linkse panel */
+.user-list {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+}
+
+/* Rechte panel */
+.user-detail {
+  background: var(--card-solid);
+  color: var(--text-dark);
+}
+
+/* Users */
+.user-item {
+  padding: 14px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: 0.2s ease;
+  font-weight: 500;
+}
+
+/* 5 Interactie Hover effect voor gebruikersitems */
+.user-item:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateX(6px);
+}
+
+.user-item.active {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+/* Detail sectie */
+.user-detail h3 {
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.user-detail p {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+/* Status */
+#status {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* leege state */
+.empty-state {
+  padding: 40px 20px;
+  color: #64748b;
+}
+
+/* 6 Responsive desgin */
+@media (max-width: 900px) { /* bij kleinere schermen (tablets en mobiel). 900px: Tablet breakpoint. */
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  body {
+    padding: 25px;
+  }
 }
