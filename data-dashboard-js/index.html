@@ -1,42 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Dashboard</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-    <h1>Welkom bij het Data Dashboard</h1>
 
-<p>Deze dashboard toont belangrijke gegevens en statistieken.</p> 
-<p>📈 De functionaliteiten:</p>
-<ul>
-  <li>API integratie</li>
-  <li>State management</li>
-  <li>Loading feedback</li>
-  <li>Error handling</li>
-  <li>Live filtering</li>
-  <li>Render-logica</li>
-</ul>
-
-
-    <h2>Gebruikerslijst</h2>
-    <input type="text" id="search" placeholder="Zoek gebruiker..." />
-    <div id="status"></div>
-    
-    <div class="dashboard">
-        <div class="user-list">
-            <h2>Gebruikers</h2>
-            <div id="users"></div>
-        </div>
-
-        <div class="user-detail">
-            <h2>Details</h2>
-            <div id="user-detail"></div>
-        </div>
+  <header class="header">
+    <div>
+      <h1>Data Dashboard</h1>
+      <p>API • State Management • Filtering • Charts</p>
     </div>
 
-    <script src="main.js"></script>
+    <button class="theme-btn" onclick="toggleTheme()">
+      Toggle Theme
+    </button>
+  </header>
+
+  <!-- Metrics -->
+  <section class="metrics">
+    <div class="metric-card">
+      <p>Total Users</p>
+      <h3 id="totalUsers">0</h3>
+    </div>
+
+    <div class="metric-card">
+      <p>Unique Cities</p>
+      <h3 id="uniqueCities">0</h3>
+    </div>
+
+    <div class="metric-card">
+      <p>Selected User</p>
+      <h3 id="selectedUserMetric">-</h3>
+    </div>
+  </section>
+
+  
+  <!-- Chart -->
+  <section class="chart-container">
+    <div class="chart-header">
+      <h3>Users per City</h3>
+      <div>
+        <button onclick="renderChart('bar')">Bar</button>
+        <button onclick="renderChart('doughnut')">Doughnut</button>
+      </div>
+    </div>
+    <canvas id="usersChart"></canvas>
+  </section>
+
+  <!-- Search -->
+   <div class="search-container">
+  <input type="text" id="search" placeholder="Zoek gebruiker..." />
+    </div>
+
+  <div id="status"></div>
+
+  <!-- Dashboard -->
+  <section class="dashboard">
+    <div class="user-list">
+      <h2>Gebruikers</h2>
+      <div id="users"></div>
+    </div>
+
+    <div class="user-detail">
+      <div id="user-detail"></div>
+    </div>
+  </section>
+
+  <script src="main.js"></script>
 </body>
 </html>
