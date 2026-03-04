@@ -176,7 +176,6 @@ function renderMetrics() {
 
 }
 
-
 // Chart.js integratie
 let chart;
 let currentChartType = "bar";
