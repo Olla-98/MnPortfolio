@@ -1,77 +1,81 @@
 <!DOCTYPE html>
 <html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Dashboard</title>
 
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Dashboard</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-  <header class="header">
-    <div>
-      <h1>Data Dashboard</h1>
-      <p>API • State Management • Filtering • Charts</p>
+    <header class="header">
+        <div>
+            <h1>Data Dashboard</h1>
+            <p>API • State Management • Filtering • Charts</p>
+        </div>
+
+        <button class="theme-btn" onclick="toggleTheme()">
+            Toggle Theme
+        </button>
+    </header>
+
+    <!-- Metrics -->
+    <section class="metrics">
+        <div class="metric-card">
+            <p>Total Users</p>
+            <h3 id="totalUsers">0</h3>
+        </div>
+
+        <div class="metric-card">
+            <p>Unique Cities</p>
+            <h3 id="uniqueCities">0</h3>
+        </div>
+
+        <div class="metric-card">
+            <p>Selected User</p>
+            <h3 id="selectedUserMetric">-</h3>
+        </div>
+    </section>
+
+
+    <!-- Chart -->
+    <section class="chart-container">
+        <div class="chart-header">
+            <h3>Users per City</h3>
+            <div>
+                <button onclick="renderChart('bar')">Bar</button>
+                <button onclick="renderChart('doughnut')">Doughnut</button>
+            </div>
+        </div>
+        <canvas id="usersChart"></canvas>
+    </section>
+
+    <!-- Search -->
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search user..." />
     </div>
 
-    <button class="theme-btn" onclick="toggleTheme()">
-      Toggle Theme
-    </button>
-  </header>
+    <div id="status"></div>
 
-  <!-- Metrics -->
-  <section class="metrics">
-    <div class="metric-card">
-      <p>Total Users</p>
-      <h3 id="totalUsers">0</h3>
-    </div>
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class="user-list">
+            <h2>Gebruikers</h2>
+            <div id="users"></div>
+        </div>
 
-    <div class="metric-card">
-      <p>Unique Cities</p>
-      <h3 id="uniqueCities">0</h3>
-    </div>
+        <div class="user-detail">
+            <div id="user-detail"></div>
+        </div>
+    </section>
 
-    <div class="metric-card">
-      <p>Selected User</p>
-      <h3 id="selectedUserMetric">-</h3>
-    </div>
-  </section>
 
-  
-  <!-- Chart -->
-  <section class="chart-container">
-    <div class="chart-header">
-      <h3>Users per City</h3>
-      <div>
-        <button onclick="renderChart('bar')">Bar</button>
-        <button onclick="renderChart('doughnut')">Doughnut</button>
-      </div>
-    </div>
-    <canvas id="usersChart"></canvas>
-  </section>
-
-  <!-- Search -->
-   <div class="search-container">
-  <input type="text" id="search" placeholder="Zoek gebruiker..." />
-    </div>
-
-  <div id="status"></div>
-
-  <!-- Dashboard -->
-  <section class="dashboard">
-    <div class="user-list">
-      <h2>Gebruikers</h2>
-      <div id="users"></div>
-    </div>
-
-    <div class="user-detail">
-      <div id="user-detail"></div>
-    </div>
-  </section>
-
-  <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="main.js"></script>
 </body>
+
 </html>

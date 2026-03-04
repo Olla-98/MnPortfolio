@@ -1,3 +1,10 @@
+// Supabase client initialiseren
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+  "https://tjdkytbzdsgbvgfvubxw.supabase.co",
+  "sb_publishable_SP9vIJGdO62BnpxBlv7tDA_HohmLtyS"
+);
 // (Centrale state-object) om gebruikersgegevens, laadstatus en foutmeldingen op te slaan
 let state = {
   users: [], // API-data wordt hier opgeslagen
@@ -14,7 +21,7 @@ function renderApp() {
 
   // Reset selectie als user niet meer zichtbaar is
   if (
-    state.selectedUser && 
+    state.selectedUser &&
     !filteredUsers.some(user => user.id === state.selectedUser.id)
   ) {
     state.selectedUser = null; // Reset de selectie
@@ -39,13 +46,14 @@ async function fetchUsers() {
     state.loading = true; // probeer de API te benaderen
     renderApp(); // status bijwerken
 
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const { data, error } = await supabaseClient
+      .from("users")
+      .select("*");
 
-    if(!response.ok) {
-      throw new Error("Netwerkfout" + response.status);
+    if (error) {
+      throw new Error(error.message);
     }
 
-    const data = await response.json();
     state.users = data;
     state.error = null;
 
@@ -55,8 +63,9 @@ async function fetchUsers() {
     state.loading = false;
     renderApp();
   }
-} 
+}
 //De data wordt niet direct in de DOM gezet, maar eerst in de state opgeslagen
+
 
 
 // Afgeleide UI via getFilteredUsers()
@@ -65,7 +74,7 @@ function getFilteredUsers() {
   const searchTerm = searchInput.value.toLowerCase();
 
   return state.users.filter(user =>
-     user.name.toLowerCase().includes(searchTerm)
+    user.name.toLowerCase().includes(searchTerm)
   );
 }
 
@@ -93,7 +102,7 @@ function renderUsers(userList) {
 
     container.appendChild(div);
   });
-} 
+}
 // De DOM is reflectie van de huidige applicatie-sate 
 
 
@@ -112,8 +121,8 @@ function renderUserDetail() {
     detail.innerHTML = `
       <h3>${state.selectedUser.name}</h3>
       <p><strong>Email:</strong> ${state.selectedUser.email}</p>
-      <p><strong>City:</strong> ${state.selectedUser.address.city}</p>
-      <p><strong>Company:</strong> ${state.selectedUser.company.name}</p>
+      <p><strong>City:</strong> ${state.selectedUser.city}</p>
+      <p><strong>Company:</strong> ${state.selectedUser.company}</p>
     `;
 
     detail.classList.add("fade-in");
@@ -151,15 +160,20 @@ function toggleTheme() {
 
 // Functie om metrische gegevens weer te geven in de DOM. renderMetrics = UI afgeleide van state sprint 3
 function renderMetrics() {
+  document.getElementById("totalUsers").textContent = state.users.length;
+
   const cities = new Set(
-    state.users.map(user => user.address.city)
+    state.users.map(user => user.city)
   );
+
+  document.getElementById("uniqueCities").textContent = cities.size;
 
   document.getElementById("selectedUserMetric").textContent =
     state.selectedUser ? state.selectedUser.name : "-";
 
   animateValue("totalUsers", state.users.length);
   animateValue("uniqueCities", cities.size);
+
 }
 
 
@@ -179,7 +193,7 @@ function renderChart(type = "bar") {
   const citiesCount = {};
 
   state.users.forEach(user => {
-    const city = user.address.city;
+    const city = user.city;
     citiesCount[city] = (citiesCount[city] || 0) + 1;
   });
 
@@ -194,18 +208,9 @@ function renderChart(type = "bar") {
       datasets: [{
         label: "Users per city",
         data: Object.values(citiesCount),
-        backgroundColor: [
-          "#8b5cf6",
-          "#06b6d4",
-          "#10b981",
-          "#f59e0b",
-          "#ef4444",
-          "#3b82f6",
-          "#14b8a6",
-          "#e11d48",
-          "#a855f7",
-          "#f97316"
-        ]
+        backgroundColor: Object.keys(citiesCount).map((_, i) =>
+          `hsl(${i * 40}, 70%, 60%)`
+        )
       }]
     },
     options: {
@@ -222,6 +227,7 @@ function renderChart(type = "bar") {
     }
   });
 }
+
 
 function animateValue(id, end) {
   const el = document.getElementById(id);
