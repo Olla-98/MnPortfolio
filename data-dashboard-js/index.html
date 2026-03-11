@@ -1,81 +1,95 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data Dashboard</title>
-
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-
 <body>
+<div class="layout">
 
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>Dashboard</h2>
+    <button class="nav-item" data-page="dashboardPage">Dashboard</button>
+    <button class="nav-item" data-page="usersPage">Users</button>
+    <button class="nav-item" data-page="analyticsPage">Analytics</button>
+    <button class="nav-item" data-page="settingsPage">Settings</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
     <header class="header">
-        <div>
-            <h1>Data Dashboard</h1>
-            <p>API • State Management • Filtering • Charts</p>
-        </div>
-
-        <button class="theme-btn" onclick="toggleTheme()">
-            Toggle Theme
-        </button>
+      <div>
+        <h1>Data Dashboard</h1>
+        <p>API • State Management • Filtering • Charts</p>
+      </div>
+      <button id="themeBtn">Toggle Theme</button>
     </header>
 
-    <!-- Metrics -->
-    <section class="metrics">
+    <!-- DASHBOARD PAGE -->
+    <section id="dashboardPage" class="page">
+      <section class="metrics">
         <div class="metric-card">
-            <p>Total Users</p>
-            <h3 id="totalUsers">0</h3>
+          <p>Total Users</p>
+          <h3 id="totalUsers">0</h3>
         </div>
-
         <div class="metric-card">
-            <p>Unique Cities</p>
-            <h3 id="uniqueCities">0</h3>
+          <p>Unique Cities</p>
+          <h3 id="uniqueCities">0</h3>
         </div>
-
         <div class="metric-card">
-            <p>Selected User</p>
-            <h3 id="selectedUserMetric">-</h3>
+          <p>Selected User</p>
+          <h3 id="selectedUserMetric">-</h3>
         </div>
-    </section>
+      </section>
 
-
-    <!-- Chart -->
-    <section class="chart-container">
+      <section class="chart-container">
         <div class="chart-header">
-            <h3>Users per City</h3>
-            <div>
-                <button onclick="renderChart('bar')">Bar</button>
-                <button onclick="renderChart('doughnut')">Doughnut</button>
-            </div>
+          <h3>Users per City</h3>
+          <div>
+            <button id="barChart">Bar</button>
+            <button id="doughnutChart">Doughnut</button>
+          </div>
         </div>
         <canvas id="usersChart"></canvas>
+      </section>
     </section>
 
-    <!-- Search -->
-    <div class="search-container">
-        <input type="text" id="search" placeholder="Search user..." />
-    </div>
-
-    <div id="status"></div>
-
-    <!-- Dashboard -->
-    <section class="dashboard">
+    <!-- USERS PAGE -->
+    <section id="usersPage" class="page">
+      <div class="search-container">
+        <input type="text" id="search" placeholder="Search user...">
+      </div>
+      <section class="dashboard">
         <div class="user-list">
-            <h2>Gebruikers</h2>
-            <div id="users"></div>
+          <h2>Users</h2>
+          <div id="users"></div>
         </div>
-
         <div class="user-detail">
-            <div id="user-detail"></div>
+          <div id="user-detail"><p>Select a user</p></div>
         </div>
+      </section>
     </section>
 
+    <!-- ANALYTICS -->
+    <section id="analyticsPage" class="page">
+      <h2>Analytics</h2>
+      <p>Analytics content is hier</p>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="main.js"></script>
+    <!-- SETTINGS -->
+    <section id="settingsPage" class="page">
+      <h2>Settings</h2>
+      <p>Settings pagina stap2</p>
+    </section>
+
+  </main>
+</div>
+
+<script type="module" src="./js/app.js"></script>
 </body>
-
 </html>
