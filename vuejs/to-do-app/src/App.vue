@@ -29,6 +29,12 @@ function voegTaakAan() {
 function toggleVoltooid(taak) {
   taak.voltooid = !taak.voltooid 
 }
+
+// functie om taken te verwijderen.
+function verwijderTaak(id) {
+  // filter() maakt een nieuwe lijst zonder de taak die je wilt verwijderen.
+  taken.value = taken.value.filter( taak => taak.id !== id) // Filter de takenlijst om de taak met het opgegeven ID te verwijderen.
+}
 </script>
 
 <template>
@@ -70,6 +76,7 @@ function toggleVoltooid(taak) {
   <span :class="{ 'klaar': taak.voltooid }">
     {{ taak.tekst }}
   </span>
+  <button @click.stop="verwijderTaak(taak.id)">Verwijder</button>
     </div>
  
  
@@ -84,6 +91,14 @@ header {
 .klaar {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+button {
+  margin-left: 1rem;
+  background: none;
+  border: 1px solid var(--section-gap);
+  color: red;
+  cursor: pointer;
 }
 
 @media (min-width: 1024px) {
