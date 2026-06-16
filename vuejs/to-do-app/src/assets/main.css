@@ -1,35 +1,143 @@
-@import './base.css';
+/* =======================================
+   RESET
+======================================= */
 
-#app {
-  max-width: 1280px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =======================================
+   VARIABLES
+======================================= */
+
+:root {
+  --bg: #0f0f13;
+  --surface: #1a1a23;
+  --surface2: #22222e;
+  --surface3: #2a2a38;
+
+  --accent: #7c6af7;
+  --accent2: #a78bfa;
+
+  --green: #34d399;
+  --red: #f87171;
+
+  --text: #f0eeff;
+  --text2: #9d9ab8;
+  --text3: #5c5a72;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+/* =======================================
+   BODY
+======================================= */
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =======================================
+   APP
+======================================= */
+
+.app {
+  width: 100%;
+  max-width: 540px;
   margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
+/* =======================================
+   HEADER
+======================================= */
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+.header {}
+.header-top {}
+.app-title {}
+.date-label {}
+.stats-row {}
+.stat-pill {}
+
+/* =======================================
+   INPUT
+======================================= */
+
+.input-card {}
+.input-icon {}
+.main-input {}
+.add-btn {}
+
+/* =======================================
+   FILTERS
+======================================= */
+
+.filter-bar {}
+.filter-btn {}
+.count-badge {}
+
+/* =======================================
+   TASK LIST
+======================================= */
+
+.task-list {}
+.task-item {}
+.task-text {}
+.task-actions {}
+.action-btn {}
+
+/* =======================================
+   EMPTY STATE
+======================================= */
+
+.empty-state {}
+.empty-icon {}
+
+/* =======================================
+   FOOTER
+======================================= */
+
+.footer-bar {}
+.footer-count {}
+.clear-btn {}
+
+/* =======================================
+   TOAST
+======================================= */
+
+.toast {}
+.toast.show {}
+
+/* =======================================
+   ANIMATIONS
+======================================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
