@@ -3,26 +3,24 @@
 // watch hadden we nodig voor localStorage. Die hebben we niet meer nodig.
 // onMounted gebruiken we om taken op te halen zodra de app opstart.
 import { ref, computed, onMounted } from 'vue'
-
 // WIJZIGING 2: supabase importeren 
 import { supabase } from './supabase.js'
-
 import TaakInput from './components/TaakInput.vue'
 import FilterBalk from './components/FilterBalk.vue'
 import TaakLijst from './components/TaakLijst.vue'
 import AppHeader from './components/AppHeader.vue'
 
 // WIJZIGING 3: taken start nu als lege array 
-// Vroeger: taken.value = localStorage lezen (werkte alleen op jouw computer)
-// Nu:      taken.value = [] — de echte data komt uit Supabase via onMounted()
-const taken = ref([])
-const filter = ref('all')
+// Vroeger: taken.value = localStorage lezen (werkte alleen op de computer)
+// Nu:      taken.value = []  de echte data komt uit Supabase via onMounted()
+const taken = ref([])  // array van taken, elke taak = { id, tekst, klaar, aangemaakt_op }. ref() maakt een reactive variabele. 
+const filter = ref('all')  // 'all', 'actief', 'voltooid'
 const laden  = ref(true) // nieuw: laad-indicator terwijl we wachten op Supabase
 const toast  = ref({ zichtbaar: false, tekst: '' })
 let toastTimer = null
 
 // WIJZIGING 4: localStorage watch volledig verwijderd 
-// Supabase slaat alles automatisch op. Je hoeft zelf niets meer te bewaren.
+// Supabase slaat alles automatisch op. Ik hoeft zelf niets meer te bewaren.
 
 // WIJZIGING 5: taken ophalen bij opstarten
 // onMounted = wordt uitgevoerd zodra de app in de browser geladen is.
@@ -41,7 +39,7 @@ onMounted(async () => {
   laden.value = false
 })
 
-// Computed properties — NIET gewijzigd
+// Computed properties, NIET gewijzigd. Deze berekenen automatisch het aantal open en voltooide taken, en filteren de taken op basis van de geselecteerde filter.
 const aantalOpen  = computed(() => taken.value.filter(t => !t.klaar).length)
 const aantalKlaar = computed(() => taken.value.filter(t =>  t.klaar).length)
 
@@ -55,12 +53,12 @@ const gefilterdeT = computed(() => {
 // Vroeger: direct in array pushen (alleen lokaal)
 // Nu: eerst INSERT naar Supabase, daarna in array zetten
 // .select().single() geeft de nieuwe rij terug met de echte database-id (uuid)
-async function voegToe(tekst) {
-  const { data, error } = await supabase
-    .from('taken')
-    .insert({ tekst, klaar: false })
-    .select()
-    .single()
+async function voegToe(tekst) { // tekst = string van de input
+  const { data, error } = await supabase // await = wachten op Supabase, want het is een async functie 
+    .from('taken') // .from() = welke tabel in Supabase
+    .insert({ tekst, klaar: false }) // .insert() = INSERT INTO taken (tekst, klaar) VALUES (tekst, false)
+    .select() // select() = SELECT * FROM taken WHERE id = ... (geeft de nieuwe rij terug)
+    .single() // single() = we verwachten maar één rij terug, niet een array
 
   if (error) { toonToast('⚠️ Toevoegen mislukt'); return }
 
@@ -71,15 +69,16 @@ async function voegToe(tekst) {
 // WIJZIGING 7: toggleKlaar is nu async 
 // Vroeger: direct t.klaar omzetten in de array
 // Nu: eerst UPDATE naar Supabase, daarna in de array aanpassen
-async function toggleKlaar(id) {
-  const taak = taken.value.find(t => t.id === id)
-  if (!taak) return
-  const nieuweStatus = !taak.klaar
+// toggleKlaar is een functie die de status van een taak omzet van klaar naar niet-klaar of andersom. Het krijgt de id van de taak mee.
+async function toggleKlaar(id) { 
+  const taak = taken.value.find(t => t.id === id) // find() = zoek de taak met deze id in de array
+  if (!taak) return // als de taak niet gevonden is, stop
+  const nieuweStatus = !taak.klaar // nieuweStatus = het tegenovergestelde van de huidige status
 
-  const { error } = await supabase
+  const { error } = await supabase // await = wachten op Supabase, want het is een async functie
     .from('taken')
-    .update({ klaar: nieuweStatus })
-    .eq('id', id) // .eq() = WHERE id = id (alleen déze taak)
+    .update({ klaar: nieuweStatus }) // .update() = UPDATE taken SET klaar = nieuweStatus
+    .eq('id', id) // .eq() = WHERE id = id (alleen déze taak) dat betekent dat we alleen de taak met deze id updaten
 
   if (error) { toonToast('⚠️ Bijwerken mislukt'); return }
 
